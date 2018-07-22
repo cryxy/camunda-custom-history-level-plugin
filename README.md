@@ -27,10 +27,22 @@ The custom history level engine plugin can be activated in the `camunda.cfg.xml`
 To enable the custom history configure it also in the `camunda.cfg.xml`:
 
 ```xml
-<property name="variablesWithoutHistory" value="variable1,variable2" />
+		<property name="history" value="bpm-per-variable" />
+```
+
+## Create a process
+
+```xml
+    <bpmn2:extensionElements>
+      <camunda:properties>
+        <camunda:property name="variablesWithoutHistory" value="action-id,camunda" />
+      </camunda:properties>
+    </bpmn2:extensionElements>
 ```
 
 ![Configure Custom History Level per variable and process](process-history-per-variable.png)
+
+The variables "action-id" and "camunda" are not saved to history.
 
 
 ## How to use it?
