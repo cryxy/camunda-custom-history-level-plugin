@@ -17,7 +17,7 @@ The custom history level engine plugin can be activated in the `camunda.cfg.xml`
 <!-- activate bpmn parse listener as process engine plugin -->
 <property name="processEnginePlugins">
   <list>
-    <bean class="org.camunda.bpm.example.CustomHistoryLevelProcessEnginePlugin" />
+    <bean class="de.cryxy.bpm.camunda.plugin.history.BpmCustomHistoryLevelProcessEnginePlugin" />
   </list>
 </property>
 ```
