@@ -6,6 +6,8 @@ This examples adds one history level:
 
 The `bpm-per-variable` history level behaves like the normal full history except that only variables which are not blacklisted in the `variablesWithoutHistory` property are saved to history. This way you can meet data protection requirements.
 
+Adapted from https://github.com/camunda/camunda-bpm-examples/tree/master/process-engine-plugin/custom-history-level
+
 
 ## Activate the Custom History Level Engine Plugin
 
