@@ -1,5 +1,7 @@
 package de.cryxy.bpm.camunda.plugin.history;
 
+import static de.cryxy.bpm.camunda.plugin.history.Constants.VAR_ACTION;
+import static de.cryxy.bpm.camunda.plugin.history.Constants.VAR_CAMUNDA;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.assertThat;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.execute;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.job;
@@ -40,7 +42,6 @@ public class BpmPerVariableHistoryLevelTest {
 	public void testProcessHistoryFull() {
 		runtimeService.startProcessInstanceByKey("process-without-custom-property");
 
-
 		// assert that full history was written
 		assertEquals(4, historyService.createHistoricVariableInstanceQuery().count());
 	}
@@ -51,15 +52,27 @@ public class BpmPerVariableHistoryLevelTest {
 		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("process-history-per-variable");
 		assertThat(processInstance).isStarted();
 
-		// Service Task 1
+		// Service Task 1 (create variables)
 		execute(job());
 		// assert that only two variables were written
 		assertEquals(2, historyService.createHistoricVariableInstanceQuery().count());
+		// assert that only two historic details are available
+		assertEquals(2, historyService.createHistoricDetailQuery().count());		
+		// no hist available for ...
+		assertEquals(0, historyService.createHistoricVariableInstanceQuery().variableName(VAR_ACTION).count());
+		assertEquals(0, historyService.createHistoricVariableInstanceQuery().variableName(VAR_CAMUNDA).count());
+
+		// Service Task 2 (update variables)
+		execute(job());
+		// assert that only two variables were written
+		assertEquals(2, historyService.createHistoricVariableInstanceQuery().count());
+		// no hist available for ...
+		assertEquals(0, historyService.createHistoricVariableInstanceQuery().variableName(VAR_ACTION).count());
+		assertEquals(0, historyService.createHistoricVariableInstanceQuery().variableName(VAR_CAMUNDA).count());
+		// assert that four historic details are available
+		assertEquals(4, historyService.createHistoricDetailQuery().count());
+	
 		
-		// Service Task 2
-		execute(job());
-		// assert that only two variables were written
-		assertEquals(2, historyService.createHistoricVariableInstanceQuery().count());
 		
 		assertThat(processInstance).isEnded();
 	}

@@ -116,7 +116,7 @@ public class BpmPerVariableHistoryLevel extends HistoryLevelFull {
 			return !variableNamesWithoutHistory.contains(variableName);
 		}
 
-		return false;
+		return true;
 
 	}
 
