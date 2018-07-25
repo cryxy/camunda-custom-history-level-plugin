@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.cryxy.bpm.camunda.plugin.history</groupId>
-	<artifactId>bpm-custom-history-level</artifactId>
+	<artifactId>bpm-custom-history-level-plugin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>BPM: Custom History Level for camunda bpm</name>
 
@@ -13,6 +13,15 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
+	<parent>
+		<artifactId>bpm-custom-history-level-build</artifactId>
+		<groupId>de.cryxy.bpm.camunda.plugin.history</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>
+      ../bpm-custom-history-level-build/pom.xml
+    </relativePath>
+	</parent>
 
 	<dependencies>
 		<dependency>
